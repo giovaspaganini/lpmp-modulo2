@@ -3,7 +3,7 @@ package rh.negocio;
 public class ClienteEndereco {
 	
 	private int pk;
-	private int pkCliente;
+	private int fkCliente;
 	private String logradouro;
 	private String bairro;
 	private String cidade;
@@ -15,7 +15,7 @@ public class ClienteEndereco {
 			String pais, String cep) {
 		super();
 		this.pk = pk;
-		this.pkCliente = pkCliente;
+		this.fkCliente = pkCliente;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.cidade = cidade;
@@ -27,7 +27,7 @@ public class ClienteEndereco {
 	public ClienteEndereco(int pkCliente, String logradouro, String bairro, String cidade, String estado, String pais,
 			String cep) {
 		super();
-		this.pkCliente = pkCliente;
+		this.fkCliente = pkCliente;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.cidade = cidade;
@@ -55,11 +55,11 @@ public class ClienteEndereco {
 	}
 	
 	public int getPkCliente() {
-		return pkCliente;
+		return fkCliente;
 	}
 	
 	public void setPkCliente(int pkCliente) {
-		this.pkCliente = pkCliente;
+		this.fkCliente = pkCliente;
 	}
 	
 	public String getLogradouro() {
@@ -112,7 +112,7 @@ public class ClienteEndereco {
 
 	@Override
 	public String toString() {
-		return "ClienteEndereco{pk=" + pk + ", pkCliente=" + pkCliente + ", logradouro=" + logradouro + ", bairro="
+		return "ClienteEndereco{pk=" + pk + ", pkCliente=" + fkCliente + ", logradouro=" + logradouro + ", bairro="
 				+ bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais + ", cep=" + cep + "}";
 	}
 	
