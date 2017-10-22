@@ -13,7 +13,6 @@ import rh.negocio.Venda;
 import rh.negocio.VendaItem;
 import rh.negocio.Cargo;
 import rh.negocio.Cliente;
-import rh.negocio.ClienteEndereco;
 import rh.negocio.Endereco;
 import rh.negocio.EnderecoCliente;
 import rh.visao.TelaCargo;

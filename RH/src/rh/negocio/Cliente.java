@@ -3,17 +3,18 @@ package rh.negocio;
 import java.util.ArrayList;
 
 public class Cliente {	
-    private int pk_cliente;
+    private int pk;
     private String nome;
     private String cpf;
     
     private ArrayList<EnderecoCliente> endereco = new ArrayList<>();
     
-    public Cliente(){        
+    public Cliente(){ 
+    	
     }
     
-    public Cliente(int pk_cliente, String nome, String cpf) {
-        this.pk_cliente = pk_cliente;
+    public Cliente(int pk, String nome, String cpf) {
+        this.pk = pk;
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -31,12 +32,12 @@ public class Cliente {
         this.endereco = endereco;
     }
     
-    public int getPk_cliente() {
-            return pk_cliente;
+    public int getPk() {
+            return pk;
     }
 
-    public void setPk_cliente(int pk) {
-            this.pk_cliente = pk_cliente;
+    public void setPk(int pk) {
+            this.pk = pk;
     }
 
     public String getNome() {
@@ -57,7 +58,7 @@ public class Cliente {
 
      @Override
      public String toString() {
-          return "Cliente{" + "pk_cliente=" + pk_cliente + ", nome=" + nome + ", cpf=" + cpf +", endereco=" + endereco + '}';
+          return "Cliente{" + "pk_cliente=" + pk + ", nome=" + nome + ", cpf=" + cpf +", endereco=" + endereco + '}';
      }
 
 }
