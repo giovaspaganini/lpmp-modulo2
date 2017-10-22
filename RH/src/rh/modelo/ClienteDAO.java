@@ -5,7 +5,6 @@
  */
 package rh.modelo;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import rh.negocio.Cliente;
 import rh.negocio.EnderecoCliente;
-import rh.negocio.EnderecoFuncionario;
-import rh.negocio.Funcionario;
+import rh.modelo.ClienteEnderecoDAO;
 
 /**
  * Realiza as resposabilidades comportamentais necessárias para a persistencia
@@ -47,7 +45,7 @@ public class ClienteDAO {
         for (EnderecoCliente aux : c.getEndereco()) {
             aux.setFk_cliente(pkc);
 
-            EnderecoClienteDAO.create(aux);
+            ClienteEnderecoDAO.create(aux);
         }
 
         return pkc;
@@ -70,18 +68,16 @@ public class ClienteDAO {
         Cliente c = new Cliente(
                 pk_cliente,
                 rs.getString("nome"),
-                rs.getString("cpf"),
-                //CargoDAO.retrieve(rs.getInt("fk_cargo"))); ainda a ver a necessidade do metodo
-
-        c.setEndereco(ClienteEnderecoDAO.retrieveAll(pk_cliente));
-
+                rs.getString("cpf"));
+                
+                c.setEndereco(ClienteEnderecoDAO.retrieveAll(pk_cliente));
         return c;
     }
 
-    public static ArrayList<Funcionario> retrieveAll() throws SQLException {
+    public static ArrayList<Cliente> retrieveAll() throws SQLException {
         Connection conn = BancoDados.createConnection();
 
-        String sql = "select * from funcionarios";
+        String sql = "select * from clientes";
 
         PreparedStatement stm = conn.prepareStatement(sql);
 
@@ -89,7 +85,7 @@ public class ClienteDAO {
 
         ResultSet rs = stm.getResultSet();
 
-        ArrayList<Funcionario> aux = new ArrayList<>();
+        ArrayList<Cliente> aux = new ArrayList<>();
 
         while (rs.next()) {
             Funcionario faux = new Funcionario(
