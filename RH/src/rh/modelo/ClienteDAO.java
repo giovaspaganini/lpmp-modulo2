@@ -99,23 +99,21 @@ public class ClienteDAO {
         return aux;
     }
     
-    public static void update(Funcionario f) throws SQLException{
+    public static void update(Cliente c) throws SQLException{
         Connection conn = BancoDados.createConnection();
         
-        String sql = "UPDATE funcionarios SET fk_cargo=?, nome=?, cpf=? WHERE pk_funcionario=?";
+        String sql = "UPDATE clientes SET nome=?, cpf=? WHERE pk_cliente=?";
         
         PreparedStatement stm = conn.prepareCall(sql);
         
-        stm.setInt(1, f.getCargo().getPk());
-        stm.setString(2, f.getNome());
-        stm.setString(3, f.getCpf());
-        stm.setInt(4, f.getPk_funcionario());
+        stm.setString(1, c.getNome());
+        stm.setString(2, c.getCpf());        
         
         stm.execute();
         
-        for (EnderecoFuncionario aux: f.getEndereco()){
+        for (EnderecoCliente aux: c.getEndereco()){
             if (!aux.isSync()){
-               FuncionarioEnderecoDAO.update(aux);
+               ClienteEnderecoDAO.update(aux);
             }
         }
     }
