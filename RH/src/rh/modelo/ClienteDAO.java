@@ -51,13 +51,13 @@ public class ClienteDAO {
         return pkc;
     }
 
-    public static Funcionario retrieve(int pk_funcionario) throws SQLException {
+    public static Cliente retrieve(int pk_cliente) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
-        String sql = "select * from funcionarios where pk_funcionario = ?";
+        String sql = "select * from clientes where pk_cliente = ?";
 
         PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setInt(1, pk_funcionario);
+        stm.setInt(1, pk_cliente);
 
         stm.execute();
 
@@ -65,15 +65,15 @@ public class ClienteDAO {
 
         rs.next();
 
-        Funcionario f = new Funcionario(
-                pk_funcionario,
+        Cliente c = new Cliente(
+                pk_cliente,
                 rs.getString("nome"),
                 rs.getString("cpf"),
-                CargoDAO.retrieve(rs.getInt("fk_cargo")));
+                //CargoDAO.retrieve(rs.getInt("fk_cargo"))); ainda a ver a necessidade do metodo
 
-        f.setEndereco(FuncionarioEnderecoDAO.retrieveAll(pk_funcionario));
+        c.setEndereco(ClienteEnderecoDAO.retrieveAll(pk_cliente));
 
-        return f;
+        return c;
     }
 
     public static ArrayList<Funcionario> retrieveAll() throws SQLException {
