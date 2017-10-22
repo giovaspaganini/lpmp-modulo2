@@ -88,15 +88,13 @@ public class ClienteDAO {
         ArrayList<Cliente> aux = new ArrayList<>();
 
         while (rs.next()) {
-            Funcionario faux = new Funcionario(
-                    rs.getInt("pk_funcionario"),
+            Cliente caux = new Cliente(
+                    rs.getInt("pk_cliente"),
                     rs.getString("nome"),
-                    rs.getString("cpf"),
-                    CargoDAO.retrieve(rs.getInt("fk_cargo")));
+                    rs.getString("cpf"));
+            caux.setEndereco(ClienteEnderecoDAO.retrieveAll(caux.getPk_cliente()));
 
-            faux.setEndereco(FuncionarioEnderecoDAO.retrieveAll(faux.getPk_funcionario()));
-
-            aux.add(faux);
+            aux.add(caux);
         }
         return aux;
     }
