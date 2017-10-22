@@ -20,12 +20,12 @@ import rh.negocio.Funcionario;
  *
  * @author L
  */
-public class FuncionarioDAO {
+public class ClienteDAO {
 
-    public static int create(Funcionario f) throws SQLException {
+    public static int create(Cliente c) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
-        String sql = "INSERT INTO funcionarios(fk_cargo, nome, cpf) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO clientes() VALUES ()";
 
         PreparedStatement stm = conn.prepareStatement(sql,
                 PreparedStatement.RETURN_GENERATED_KEYS);
@@ -39,17 +39,17 @@ public class FuncionarioDAO {
 
         rs.next();
 
-        int pkf = rs.getInt("pk_funcionario");
+        int pkc = rs.getInt("pk_cliente");
 
-        f.setPk_funcionario(pkf);
+        c.setPk_cliente(pkc);
 
-        for (EnderecoFuncionario aux : f.getEndereco()) {
-            aux.setFk_funcionario(pkf);
+        for (EnderecoCliente aux : c.getEndereco()) {
+            aux.setFk_cliente(pkc);
 
-            FuncionarioEnderecoDAO.create(aux);
+            ClienteEnderecoDAO.create(aux);
         }
 
-        return pkf;
+        return pkc;
     }
 
     public static Funcionario retrieve(int pk_funcionario) throws SQLException {
