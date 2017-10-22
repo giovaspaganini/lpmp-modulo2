@@ -8,6 +8,7 @@ import java.util.Date;
 
 import rh.modelo.BancoDados;
 import rh.modelo.CargoDAO;
+import rh.modelo.ClienteDAO;
 import rh.negocio.Funcionario;
 import rh.negocio.Venda;
 import rh.negocio.VendaItem;
@@ -22,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException  {
         
-    	Cliente cliente = new Cliente(10, "luiz", "05415751122");
+    	Cliente cliente = new Cliente(11, "luiz", "05415751127");
     	System.out.println(cliente);
     	
     	Venda venda = new Venda(10, 10, 10, 10, new Date());
@@ -34,6 +35,9 @@ public class Main {
     	
     	EnderecoCliente enderecoCliente = new EnderecoCliente("Rua 14", "Jardim Goiás", "Morrinhos", "Goiás");
     	System.out.println(enderecoCliente);
+    	    	
+    	
+    	
     	
     }
     

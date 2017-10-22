@@ -45,7 +45,7 @@ public class ClienteEnderecoDAO {
      */
     public static EnderecoCliente retrieve(int pk) throws SQLException{
         Connection conn = BancoDados.createConnection();
-        PreparedStatement stm = conn.prepareStatement("select * from clientes_enderecos where pk_endereco = ?");
+        PreparedStatement stm = conn.prepareStatement("select * from clientes_enderecos where pk_enderenco = ?");
         stm.setInt(1, pk);
         
         stm.execute();
@@ -53,7 +53,7 @@ public class ClienteEnderecoDAO {
         ResultSet rs = stm.getResultSet();
         
         rs.next();
-        return new EnderecoCliente(rs.getInt("pk_endereco"),
+        return new EnderecoCliente(rs.getInt("pk_enderenco"),
                          rs.getInt("fk_cliente"),
                          rs.getString("logradouro"),
                          rs.getString("bairro"),
@@ -84,7 +84,7 @@ public class ClienteEnderecoDAO {
         ResultSet rs = stm.getResultSet();
                 
         while (rs.next()){
-            EnderecoCliente e = new EnderecoCliente(rs.getInt("pk_endereco"),
+            EnderecoCliente e = new EnderecoCliente(rs.getInt("pk_enderenco"),
                          rs.getInt("fk_cliente"),
                          rs.getString("logradouro"),
                          rs.getString("bairro"),
@@ -123,7 +123,7 @@ public class ClienteEnderecoDAO {
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
         }
 
-        String sql = "delete from clientes_enderecos where pk_endereco=?";
+        String sql = "delete from clientes_enderecos where pk_enderenco=?";
         
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement(sql);
