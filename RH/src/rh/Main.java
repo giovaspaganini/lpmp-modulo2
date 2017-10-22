@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+
 import rh.modelo.BancoDados;
 import rh.modelo.CargoDAO;
 import rh.negocio.Funcionario;
+import rh.negocio.Venda;
 import rh.negocio.Cargo;
 import rh.negocio.Cliente;
 import rh.negocio.ClienteEndereco;
@@ -23,6 +26,9 @@ public class Main {
     	
     	ClienteEndereco clienteEndereco = new ClienteEndereco(10, 10, "Rua 14 13", "Jardim Goiás", "Morrinhos", "Goiás", "Brasil", "75650000");
     	System.out.println(clienteEndereco);
+    	
+    	Venda venda = new Venda(10, 10, 10, 10, new Date());
+    	System.out.println(venda);
 
     	
     	
