@@ -40,7 +40,7 @@ public class ClienteDAO {
 
         int pkc = rs.getInt("pk_cliente");
 
-        c.setPk_cliente(pkc);
+        c.setPk(pkc);
 
         for (EnderecoCliente aux : c.getEndereco()) {
             aux.setFk_cliente(pkc);
@@ -92,7 +92,7 @@ public class ClienteDAO {
                     rs.getInt("pk_cliente"),
                     rs.getString("nome"),
                     rs.getString("cpf"));
-            caux.setEndereco(ClienteEnderecoDAO.retrieveAll(caux.getPk_cliente()));
+            caux.setEndereco(ClienteEnderecoDAO.retrieveAll(caux.getPk()));
 
             aux.add(caux);
         }
@@ -119,7 +119,7 @@ public class ClienteDAO {
     }
     
     public static void delete(Cliente c) throws SQLException{
-        if (c.getPk_cliente()==0){
+        if (c.getPk()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
         }
 
@@ -128,7 +128,7 @@ public class ClienteDAO {
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        stm.setInt(1, c.getPk_cliente());       
+        stm.setInt(1, c.getPk());       
         stm.execute();
         stm.close();        
     }
