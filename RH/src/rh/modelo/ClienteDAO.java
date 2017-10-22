@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import rh.negocio.Cliente;
+import rh.negocio.EnderecoCliente;
 import rh.negocio.EnderecoFuncionario;
 import rh.negocio.Funcionario;
 
@@ -45,7 +47,7 @@ public class ClienteDAO {
         for (EnderecoCliente aux : c.getEndereco()) {
             aux.setFk_cliente(pkc);
 
-            ClienteEnderecoDAO.create(aux);
+            EnderecoClienteDAO.create(aux);
         }
 
         return pkc;
