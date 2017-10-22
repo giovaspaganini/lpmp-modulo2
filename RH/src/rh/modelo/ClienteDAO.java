@@ -25,13 +25,12 @@ public class ClienteDAO {
     public static int create(Cliente c) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
-        String sql = "INSERT INTO clientes() VALUES ()";
+        String sql = "INSERT INTO clientes(nome, cpf) VALUES (?, ?)";
 
         PreparedStatement stm = conn.prepareStatement(sql,
-                PreparedStatement.RETURN_GENERATED_KEYS);
-        stm.setInt(1, f.getCargo().getPk());
-        stm.setString(2, f.getNome());
-        stm.setString(3, f.getCpf());
+                PreparedStatement.RETURN_GENERATED_KEYS);        
+        stm.setString(1, c.getNome());
+        stm.setString(2, c.getCpf());
 
         stm.execute();
 
