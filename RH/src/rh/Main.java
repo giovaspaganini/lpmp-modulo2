@@ -15,6 +15,7 @@ import rh.negocio.Cargo;
 import rh.negocio.Cliente;
 import rh.negocio.ClienteEndereco;
 import rh.negocio.Endereco;
+import rh.negocio.EnderecoCliente;
 import rh.visao.TelaCargo;
 
 
@@ -35,6 +36,8 @@ public class Main {
     	System.out.println(vendaItem);
 
     	
+    	EnderecoCliente enderecoCliente = new EnderecoCliente("Rua 14", "Jardim Goiás", "Morrinhos", "Goiás");
+    	System.out.println(enderecoCliente);
     	
     }
     

@@ -8,20 +8,21 @@ public class EnderecoCliente extends Endereco{
         this.fk_cliente = fk_cliente;
     }
 
-    public int getFk_cliente() {
+    public EnderecoCliente(int pk_endereco, String logradouro, String bairro, String cidade, String estado) {
+    	super(pk_endereco, logradouro, bairro, cidade, estado);
+	}
+
+    public EnderecoCliente(String logradouro, String bairro, String cidade, String estado) {
+    	super(logradouro, bairro, cidade, estado);
+	}
+
+	public int getFk_cliente() {
         return fk_cliente;
     }
 
     public void setFk_cliente(int fk_cliente) {
         this.fk_cliente = fk_cliente;
     }
-
-    @Override
-    public String toString() {
-        return super.toString() + ", " + fk_cliente; //To change body of generated methods, choose Tools | Templates.
-    }
-
-
     
     
 }
