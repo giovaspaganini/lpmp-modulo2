@@ -26,9 +26,6 @@ public class Main {
     	Cliente cliente = new Cliente(10, "luiz", "05415751122");
     	System.out.println(cliente);
     	
-    	ClienteEndereco clienteEndereco = new ClienteEndereco(10, 10, "Rua 14 13", "Jardim Goiás", "Morrinhos", "Goiás", "Brasil", "75650000");
-    	System.out.println(clienteEndereco);
-    	
     	Venda venda = new Venda(10, 10, 10, 10, new Date());
     	System.out.println(venda);
     	
