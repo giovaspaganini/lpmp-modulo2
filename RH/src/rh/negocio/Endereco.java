@@ -90,8 +90,6 @@ public class Endereco {
     public void setSync(boolean sync) {
         this.sync = sync;
     }
-    
-    
 
     @Override
     public String toString() {
