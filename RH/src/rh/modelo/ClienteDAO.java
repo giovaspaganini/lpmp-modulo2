@@ -118,17 +118,17 @@ public class ClienteDAO {
         }
     }
     
-    public static void delete(Funcionario f) throws SQLException{
-        if (f.getPk_funcionario()==0){
+    public static void delete(Cliente c) throws SQLException{
+        if (c.getPk_cliente()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
         }
 
-        String sql = "delete from funcionarios where pk_funcionario =?";
+        String sql = "delete from clientes where pk_cliente =?";
         
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        stm.setInt(1, f.getPk_funcionario());       
+        stm.setInt(1, c.getPk_cliente());       
         stm.execute();
         stm.close();        
     }
