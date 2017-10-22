@@ -132,5 +132,20 @@ public class ClienteDAO {
         stm.execute();
         stm.close();        
     }
+    
+    public static void delete(int id) throws SQLException{
+        if (id==0){
+            throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
+        }
+
+        String sql = "delete from clientes where pk_cliente =?";
+        
+        Connection conn = BancoDados.createConnection();
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setInt(1, id);       
+        stm.execute();
+        stm.close();        
+    }
 
 }
