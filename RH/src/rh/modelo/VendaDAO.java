@@ -12,6 +12,7 @@ import rh.negocio.Venda;
  * @author Giovani Paganini <giovanipaganini@outlook.com>
  */
 public class VendaDAO {
+    
     public int create(Venda v) throws SQLException {
         Connection conn = BancoDados.createConnection();
         
@@ -31,9 +32,11 @@ public class VendaDAO {
         
         rs.next();
         
+        v.setPk(rs.getInt(1));
         
-               
+        stm.close();
         
-        return 0;        
+        return v.getPk();        
     }
+    
 }
