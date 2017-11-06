@@ -39,4 +39,23 @@ public class VendaDAO {
         return v.getPk();        
     }
     
+    public static void delete(Venda v) throws SQLException{
+        if (v.getPk()==0){
+            throw new SQLException("Objeto nã persistido ainda ou com a chave primaria não configurada");
+        }
+        
+        String sql = "delete from vendas where pk_venda=?";
+        
+        Connection conn = BancoDados.createConnection();
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setInt(1, v.getPk());
+        stm.execute();
+        stm.close();
+    } 
+    
+    public static Venda retrieve(int pk) {
+        Connection conn = BancoDados.createConnection();
+        PreparedStatement stm = conn.prepareStatement("select * from vendas")
+    }
 }
