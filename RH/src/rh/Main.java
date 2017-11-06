@@ -22,23 +22,8 @@ import rh.visao.TelaCargo;
 public class Main {
 
     public static void main(String[] args) throws SQLException  {
-        
-    	Cliente cliente = new Cliente(11, "luiz", "05415751127");
-    	System.out.println(cliente);
-    	
-    	Venda venda = new Venda(10, 10, 10, 10, new Date());
-    	System.out.println(venda);
-    	
-    	VendaItem vendaItem = new VendaItem(10, 10, 10, 50, 12.80);
-    	System.out.println(vendaItem);
-
-    	
-    	EnderecoCliente enderecoCliente = new EnderecoCliente("Rua 14", "Jardim Goiás", "Morrinhos", "Goiás");
-    	System.out.println(enderecoCliente);
-    	    	
-    	
-    	
-    	
+      
+        System.out.println(ClienteDAO.retrieveByCidade("Goiania"));    	
     }
     
 }
