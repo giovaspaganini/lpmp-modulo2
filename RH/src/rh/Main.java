@@ -9,6 +9,7 @@ import java.util.Date;
 import rh.modelo.BancoDados;
 import rh.modelo.CargoDAO;
 import rh.modelo.ClienteDAO;
+import rh.modelo.VendaDAO;
 import rh.negocio.Funcionario;
 import rh.negocio.Venda;
 import rh.negocio.VendaItem;
@@ -21,10 +22,9 @@ import rh.visao.TelaCargo;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException  {
-      
-        System.out.println(ClienteDAO.retrieveByCidade("Goiania"));
-        System.out.println(ClienteDAO.retrieveByEstado("GO"));
+    public static void main(String[] args) throws SQLException  {    
+        
+        System.out.println(VendaDAO.retriveByCliente(new Cliente(2, "Mateus", "555")));
         
     }
     
