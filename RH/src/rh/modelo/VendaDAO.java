@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import rh.negocio.Cliente;
 import rh.negocio.Venda;
 
 /**
@@ -107,7 +108,7 @@ public class VendaDAO {
         stm.close();
     } 
 
-     public static ArrayList<Venda> retrieveAll() throws SQLException{
+    public static ArrayList<Venda> retrieveAll() throws SQLException{
         
         ArrayList<Venda> aux = new ArrayList<>();
         
@@ -130,4 +131,37 @@ public class VendaDAO {
         return aux;
     }
      
+    public static ArrayList<Venda> retriveByCliente(Cliente c) throws SQLException{
+        
+        
+         ArrayList<Venda> aux = new ArrayList<>();
+        
+        Connection conn = BancoDados.createConnection();
+        
+        String sql = "SELECT * FROM vendas where fk_cliente = ?";
+        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setInt(1, c.getPk());
+        stm.execute();
+              
+        ResultSet rs = stm.getGeneratedKeys();
+        
+        
+        while (rs.next()){
+            
+            Venda v = new Venda(rs.getInt("pk_venda"),
+                         rs.getInt("fk_cliente"),
+                         rs.getInt("fk_vendedor"),
+                         rs.getInt("numero"),
+                         rs.getDate("data"));
+            
+            aux.add(v);
+        }
+        
+        return aux;
+        
+        
+        
+    }
 }
