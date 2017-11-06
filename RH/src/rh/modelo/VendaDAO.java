@@ -74,4 +74,21 @@ public class VendaDAO {
         );
         
     }
+    
+        public static void update(Venda v) throws SQLException {
+        Connection conn = BancoDados.createConnection();
+
+        String sql = "UPDATE vendas SET fk_cliente=?, fk_vendedor=?, numero=?, data=? WHERE pk_venda=?";
+
+        PreparedStatement stm = conn.prepareCall(sql);
+
+        stm.setInt(1, v.getFkCliente());
+        stm.setInt(2, v.getFkVendedor());
+        stm.setInt(3, v.getNumero());
+        stm.setDate(4, (Date) v.getData());
+
+        stm.execute();
+
+    }
+
 }
