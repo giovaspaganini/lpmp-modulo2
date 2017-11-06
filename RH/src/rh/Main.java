@@ -23,7 +23,9 @@ public class Main {
 
     public static void main(String[] args) throws SQLException  {
       
-        System.out.println(ClienteDAO.retrieveByCidade("Goiania"));    	
+        System.out.println(ClienteDAO.retrieveByCidade("Goiania"));
+        System.out.println(ClienteDAO.retrieveByEstado("GO"));
+        
     }
     
 }

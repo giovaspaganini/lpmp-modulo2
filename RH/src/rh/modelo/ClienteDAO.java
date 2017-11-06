@@ -169,5 +169,24 @@ public class ClienteDAO {
          return aux;
     }
     
+    public static ArrayList<Cliente> retrieveByEstado(String  nomeEstado) throws SQLException {
+        
+        ArrayList<Cliente> aux = new ArrayList<>();        
+        
+        Connection conn = BancoDados.createConnection();
 
+        String sql = "select * from clientes c join clientes_enderecos ce on c.pk_cliente = ce.fk_cliente where estado = ?";
+
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, nomeEstado);
+
+        stm.execute();
+
+        ResultSet rs = stm.getResultSet();
+        
+        while( rs.next()){
+            aux.add( new Cliente( rs.getInt("pk_cliente"),  rs.getString("nome"), rs.getString("cpf")));
+        }
+         return aux;
+    }
 }
