@@ -54,8 +54,24 @@ public class VendaDAO {
         stm.close();
     } 
     
-    public static Venda retrieve(int pk) {
+    public static Venda retrieve(int pk) throws SQLException {
         Connection conn = BancoDados.createConnection();
-        PreparedStatement stm = conn.prepareStatement("select * from vendas")
+        PreparedStatement stm = conn.prepareStatement("select * from vendas where pk_venda=?");
+        stm.setInt(1, pk);
+        
+        stm.execute();
+        
+        ResultSet rs = stm.getResultSet();
+        
+        rs.next();
+        
+        
+        return new Venda(rs.getInt("pk_venda"),
+                         rs.getInt("fk_cliente"),
+                         rs.getInt("fk_vendedor"),
+                         rs.getInt("numero"),
+                         rs.getDate("data")
+        );
+        
     }
 }
