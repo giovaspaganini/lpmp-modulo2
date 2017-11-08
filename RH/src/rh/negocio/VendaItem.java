@@ -1,7 +1,5 @@
 package rh.negocio;
 
-import java.util.Date;
-
 public class VendaItem {
 	
 	private int pk;
