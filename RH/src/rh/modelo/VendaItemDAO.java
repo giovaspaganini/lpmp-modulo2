@@ -142,23 +142,23 @@ public class VendaItemDAO {
         stm.close();        
     }
     
-    public static ArrayList<Produto> retrieveByProduto(int vendaPorProduto) throws SQLException {
+    public static ArrayList<VendaItem> retrieveByProduto(String vendaPorProduto) throws SQLException {
         
-        ArrayList<Produto> aux = new ArrayList<>();
+        ArrayList<VendaItem> aux = new ArrayList<>();
         
         Connection conn = BancoDados.createConnection();
         
         String sql = "";
         
         PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setInt(1, vendaPorProduto);
+        stm.setString(1, vendaPorProduto);
 
         stm.execute();
 
         ResultSet rs = stm.getResultSet();
         
         while( rs.next()){
-            aux.add( new Produto( rs.getInt("pk_cliente"),  rs.getString("nome"), rs.getString("cpf")));
+            aux.add(new VendaItem(0, 0, 0, 0, 0));
         }
         
     
