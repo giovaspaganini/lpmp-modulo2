@@ -141,6 +141,10 @@ public class VendaItemDAO {
         stm.execute();
         stm.close();        
     }
+    
+    public static void retrieveByProduto() {
+        
+    }
 
 }
     
