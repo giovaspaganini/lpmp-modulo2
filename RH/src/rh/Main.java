@@ -24,7 +24,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException  {    
         
-        System.out.println(VendaDAO.retriveByCliente(new Cliente(2, "Mateus", "555")));
+        System.out.println(ClienteDAO.retrieveByCidade("Morrinhos"));
         
     }
     
