@@ -6,11 +6,11 @@
 package rh.modelo;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import rh.negocio.Produto;
 import rh.negocio.VendaItem;
 
 /**
@@ -142,9 +142,30 @@ public class VendaItemDAO {
         stm.close();        
     }
     
-    public static void retrieveByProduto() {
+    public static ArrayList<Produto> retrieveByProduto(int vendaPorProduto) throws SQLException {
         
+        ArrayList<Produto> aux = new ArrayList<>();
+        
+        Connection conn = BancoDados.createConnection();
+        
+        String sql = "";
+        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, vendaPorProduto);
+
+        stm.execute();
+
+        ResultSet rs = stm.getResultSet();
+        
+        while( rs.next()){
+            aux.add( new Produto( rs.getInt("pk_cliente"),  rs.getString("nome"), rs.getString("cpf")));
+        }
+        
+    
+        
+        return aux;
     }
+    
 
 }
     
