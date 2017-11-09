@@ -157,4 +157,35 @@ public class VendaDAO {
         
         return aux;        
     }
+    
+    public static ArrayList<Venda> retrieveByData(Date dataInicial, Date dataFinal) throws SQLException{
+        
+        ArrayList<Venda> aux = new ArrayList<>();
+        
+        Connection conn = BancoDados.createConnection();
+        
+        String sql = "SELECT * FROM vendas WHERE DATA >= ? AND DATA <= ?";
+        
+        System.out.println("retrieveByData entre " + dataInicial + " e " + "dataFinal " + dataFinal);
+        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        
+        stm.setDate(1, dataInicial);
+        stm.setDate(2, dataFinal);
+        stm.execute();
+              
+        ResultSet rs = stm.getResultSet();
+        
+        while (rs.next()){            
+            Venda v = new Venda(rs.getInt("pk_venda"),
+                         rs.getInt("fk_cliente"),
+                         rs.getInt("fk_vendedor"),
+                         rs.getInt("numero"),
+                         rs.getDate("data"));            
+            aux.add(v);
+        }
+        
+        
+        return aux;
+    }
 }
