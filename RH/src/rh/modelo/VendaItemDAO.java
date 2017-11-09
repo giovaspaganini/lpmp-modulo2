@@ -147,7 +147,16 @@ public class VendaItemDAO {
         
         Connection conn = BancoDados.createConnection();
         
-        String sql = "";
+        String sql = "SELECT pk_produto, nome," +
+            " sum(qtd)," +
+            " avg(qtd) media_qtd," +
+            " sum(valor_unitario)," +
+            " avg(valor_unitario) media_vu" +
+            " FROM vendas v JOIN vendas_itens i ON" +
+            "	v.pk_venda = i.fk_venda JOIN" +
+            "	produtos p ON p.pk_produto = i.fk_produto" +
+            " where pk_produto = ?" +
+            " group by pk_produto, nome";
         
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1, vendaPorProduto);
