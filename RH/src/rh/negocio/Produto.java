@@ -1,12 +1,24 @@
 package rh.negocio;
 
+/**
+ *
+ * @author Fernando
+ */
 
 public class Produto {
 
     private int pk_produto;
     private String nome;
-    private int estoque_minimo,qtd_estoque;
+    private int estoque_minimo, qtd_estoque;
 
+    /**
+     *
+     * @param pk_produto recebe a chave primaria do produto
+     * @param nome recebe o nome do produto
+     * @param estoque_minimo recebe o valor do estoque minimo definido para
+     * produto
+     * @param qtd_estoque recebe a quantidade em estoque do produto
+     */
     public Produto(int pk_produto, String nome, int estoque_minimo, int qtd_estoque) {
         this.pk_produto = pk_produto;
         this.nome = nome;
@@ -56,7 +68,5 @@ public class Produto {
     public String toString() {
         return "Produto{" + "pk_produto=" + pk_produto + ", nome=" + nome + ", estoque_minimo=" + estoque_minimo + ", qtd_estoque=" + qtd_estoque + '}';
     }
-    
-    
-    
+
 }

@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import rh.negocio.Produto;
 
+
+
 public class ProdutoDAO {
 
+    /**
+     * 
+     * @param p recebe o objeto Produto vindo como parâmetro
+     * @return
+     * @throws SQLException 
+     */
     public static int create(Produto p) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
@@ -31,6 +39,12 @@ public class ProdutoDAO {
         return p.getPk_produto();
     }
 
+    /**
+     * 
+     * @param pk recebe a chave primaria
+     * @return
+     * @throws SQLException 
+     */
     public static Produto retrieve(int pk) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
@@ -49,6 +63,11 @@ public class ProdutoDAO {
 
     }
 
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
     public static ArrayList<Produto> retrieveAll() throws SQLException {
         Connection conn = BancoDados.createConnection();
 
