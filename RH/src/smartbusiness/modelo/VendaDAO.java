@@ -232,4 +232,47 @@ public class VendaDAO {
         
         return aux;
     }
+	public static ArrayList<RelatorioVenda> retrieveRelatorioVenda() throws SQLException{
+        
+        ArrayList<RelatorioVenda> aux = new ArrayList<>();
+        
+        Connection conn = BancoDados.createConnection();
+        
+//        sql = "SELECT nome, qtd, sum(qtd*valor_unitario) as total"
+//                + " FROM vendas v JOIN produtos p ON"
+//                + " v.fk_cliente = p.pk_produto JOIN vendas_itens i ON"
+//                + " pk_venda = i.fk_venda GROUP BY nome, qtd";
+
+        String sql = "SELECT pk_venda, data_baixa, data, nome, qtd, sum(qtd*valor_unitario) as total " +
+            " FROM vendas v JOIN produtos p ON" +
+            " v.fk_cliente = p.pk_produto JOIN" +
+            " vendas_itens i ON pk_venda = i.fk_venda" +
+            " JOIN financeiros_entradas fe ON fe.fk_venda = v.pk_venda" +
+            " GROUP BY nome, qtd, v.data, data_baixa, pk_venda";
+        
+        ResultSet rs = conn.createStatement().executeQuery(sql);
+        
+        while (rs.next()){
+            
+            boolean baixa;
+            String teste = rs.getString("data_baixa");
+            if (teste == null) baixa = false;
+            else baixa = true;
+                    
+                    
+            RelatorioVenda rv = new RelatorioVenda(
+                    rs.getInt("pk_venda"),
+                    baixa,
+                    rs.getDate("data"),
+                    rs.getString("nome"),
+                    rs.getDouble("qtd"),
+                    rs.getDouble("total"));
+            
+            aux.add(rv);
+        }
+        
+        return aux;
+        
+        
+    }
 }
