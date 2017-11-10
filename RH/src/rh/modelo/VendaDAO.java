@@ -9,12 +9,20 @@ import java.util.ArrayList;
 import rh.negocio.Cliente;
 import rh.negocio.Venda;
 
+
 /**
- *
- * @author Giovani Paganini <giovanipaganini@outlook.com>
+ * Classe responsável pela percistencia da classe Venda
+ *  
  */
+
 public class VendaDAO {
     
+	/**
+   	 * Método responsável por criar um novo resgistro de Venda
+   	 *
+   	 * @param v Objeto da Classe Venda
+   	 * @return chave primária do registro criado
+   	 */
     public int create(Venda v) throws SQLException {
         Connection conn = BancoDados.createConnection();
         
@@ -41,6 +49,11 @@ public class VendaDAO {
         return v.getPk();        
     }
     
+    /**
+   	 * Método responsável por deletar uma venda do banco de dados
+   	 *
+   	 * @param v Venda que será apagada do banco de dados
+   	 */
     public static void delete(Venda v) throws SQLException{
         if (v.getPk()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primaria não configurada");
@@ -56,6 +69,12 @@ public class VendaDAO {
         stm.close();
     } 
     
+    /**
+   	 * Método responsável por recuperar uma Venda por sua chave primária
+   	 *
+   	 * @param pk chave primaria da Venda
+   	 * @return Venda recuperada do banco
+   	 */
     public static Venda retrieve(int pk) throws SQLException {
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement("select * from vendas where pk_venda=?");
@@ -76,8 +95,13 @@ public class VendaDAO {
         );
         
     }
-    
-        public static void update(Venda v) throws SQLException {
+   
+    /**
+   	 * Método responsável por atualizar uma venda no banco de dados
+   	 *
+   	 * @param v Venda que será atualizada no banco
+   	 */
+    public static void update(Venda v) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
         String sql = "UPDATE vendas SET fk_cliente=?, fk_vendedor=?, numero=?, data=? WHERE pk_venda=?";
@@ -92,7 +116,10 @@ public class VendaDAO {
         stm.execute();
 
     }
-        
+    
+    /**
+   	 * Método responsável por deletar uma Venda por chave primária
+   	 */
     public static void delete(int id) throws SQLException{
         if (id ==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primaria não configurada");
@@ -108,6 +135,10 @@ public class VendaDAO {
         stm.close();
     } 
 
+    /**
+   	 * Método responsável por recuperar todas as vendas do banco de dados
+   	 * @return ArrayList de Venda
+   	 */
     public static ArrayList<Venda> retrieveAll() throws SQLException{
         
         ArrayList<Venda> aux = new ArrayList<>();
@@ -130,7 +161,13 @@ public class VendaDAO {
         
         return aux;
     }
-     
+    
+    /**
+   	 * Método responsável por recuperar todas as vendas por cliente
+   	 *
+   	 * @param c Cliente que terá suas vendas recuperadas
+   	 * @return ArrayList de vendas deu um cliente
+   	 */
     public static ArrayList<Venda> retriveByCliente(Cliente c) throws SQLException{ 
         
          ArrayList<Venda> aux = new ArrayList<>();
@@ -157,7 +194,14 @@ public class VendaDAO {
         
         return aux;        
     }
-    
+   
+    /**
+   	 * Método responsável por retornar todas as vendas entre determinadas datas
+   	 *
+   	 * @param dataInicial data inicial da pesquisa
+   	 * @param dataFinal data final da pesquisa
+   	 * @return Vendas realizadas entre o periodo informado
+   	 */
     public static ArrayList<Venda> retrieveByData(Date dataInicial, Date dataFinal) throws SQLException{
         
         ArrayList<Venda> aux = new ArrayList<>();
