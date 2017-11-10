@@ -21,7 +21,6 @@ public class Venda {
    	 * @param fkVendedor chave estrangeira do vendedor
    	 * @param numero numero da venda
    	 * @param data data da venda
-   	 * @return
    	 */
     public Venda(int pk, int fkCliente, int fkVendedor, int numero, Date data) {
             super();
@@ -39,7 +38,6 @@ public class Venda {
    	 * @param fkVendedor chave estrangeira do vendedor
    	 * @param numero numero da venda
    	 * @param data data da venda
-   	 * @return
    	 */
     public Venda(int fkCliente, int fkVendedor, int numero, Date data) {
             super();
@@ -56,7 +54,6 @@ public class Venda {
    	 * @param fkVendedor chave estrangeira do vendedor
    	 * @param numero numero da venda
    	 * @param data data da venda
-   	 * @return
    	 */
     public Venda(int fkVendedor, int numero, Date data) {
             super();
@@ -70,7 +67,6 @@ public class Venda {
    	 *
    	 * @param numero numero da venda
    	 * @param data data da venda
-   	 * @return
    	 */
     public Venda(int numero, Date data) {
             super();
