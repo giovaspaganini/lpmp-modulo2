@@ -15,8 +15,7 @@ import rh.negocio.EnderecoCliente;
 import rh.modelo.ClienteEnderecoDAO;
 
 /**
- * Realiza as resposabilidades comportamentais necessárias para a persistencia
- * de um Cliente no banco de dados
+ * Realiza as resposabilidades comportamentais necessárias para a persistencia de um Cliente no banco de dados
  *
  */
 public class ClienteDAO {

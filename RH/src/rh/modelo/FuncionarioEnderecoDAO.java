@@ -15,10 +15,18 @@ import rh.negocio.Endereco;
 import rh.negocio.EnderecoFuncionario;
 
 /**
- *
- * @author L
+ * 
+ *  Classe responsável pela percistencia de EnderecoFuncionario
  */
+
 public class FuncionarioEnderecoDAO {
+	
+	/**
+   	 * Método responsável por criar um novo registro de EnderecoFuncionario no banco
+   	 *
+   	 * @param e EnderecoFuncionario que será gravadp no banco
+   	 * @return chave primária de EnderecoFuncionario gravado
+   	 */
     public static int create(EnderecoFuncionario e) throws SQLException{
 
         Connection conn = BancoDados.createConnection();
@@ -45,11 +53,11 @@ public class FuncionarioEnderecoDAO {
         return e.getPk_endereco();
     }
     /**
-     * 
-     * @param pk
-     * @return
-     * @throws SQLException 
-     */
+   	 * Método responsável por recuperar um EnderecoFuncionario por chave primária
+   	 *
+   	 * @param pk chave primaria de EnderecoFuncionario
+   	 * @return EnderecoFuncionario recuperado por chave primária
+   	 */
     public static EnderecoFuncionario retrieve(int pk) throws SQLException{
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement("select * from funcionarios_enderecos where pk_endereco = ?");
@@ -104,7 +112,12 @@ public class FuncionarioEnderecoDAO {
         return aux;
 
     }
-       
+     
+    /**
+   	 * Método responsável por atualizar um EnderecoFuncionario
+   	 *
+   	 * @param e EnderecoFuncionario que será atualizado
+   	 */
     public static void update(EnderecoFuncionario e) throws SQLException{
         if (e.getPk_endereco()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
@@ -127,6 +140,11 @@ public class FuncionarioEnderecoDAO {
         stm.close();
     }
     
+    /**
+   	 * Método responsável por deletar EnderecoFuncionario no banco de dados
+   	 *
+   	 * @param e EnderecoFuncionario que será gravado no banco de dados
+   	 */
     public static void delete(EnderecoFuncionario e) throws SQLException{
         if (e.getPk_endereco()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
