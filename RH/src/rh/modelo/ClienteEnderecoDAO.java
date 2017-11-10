@@ -7,11 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import rh.negocio.EnderecoCliente;
 
+
 /**
- *
- * @author Giovani Paganini
+ * Classe resposável pela persistencia de EnderecoCliente
+ *  
  */
+
 public class ClienteEnderecoDAO {
+	
+	/**
+   	 * Método responsável por criar um novo registro de EnderecoCliente
+   	 *
+   	 * @param e EnderecoCliente que será gravado no banco de dados
+   	 * @return chave primária do item
+   	 */
     public static int create(EnderecoCliente e) throws SQLException{
 
         Connection conn = BancoDados.createConnection();
@@ -37,12 +46,13 @@ public class ClienteEnderecoDAO {
         //retorna a chave primária
         return e.getPk_endereco();
     }
+    
     /**
-     * 
-     * @param pk
-     * @return
-     * @throws SQLException 
-     */
+   	 * Método responsável por recuperar um EnderecoCliente pela chave primária
+   	 *
+   	 * @param pk chave primária que será buscada no banco
+   	 * @return retorna EnderecoCliente que bate com a chave passada
+   	 */
     public static EnderecoCliente retrieve(int pk) throws SQLException{
         Connection conn = BancoDados.createConnection();
         PreparedStatement stm = conn.prepareStatement("select * from clientes_enderecos where pk_enderenco = ?");
@@ -96,7 +106,12 @@ public class ClienteEnderecoDAO {
         return aux;
 
     }
-       
+     
+    /**
+   	 * Método responsável por atualizar um registro de EnderecoCliente no banco
+   	 *
+   	 * @param e EnderecoCliente que será atualizado
+   	 */
     public static void update(EnderecoCliente e) throws SQLException{
         if (e.getPk_endereco()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
@@ -117,7 +132,12 @@ public class ClienteEnderecoDAO {
         e.setSync(true);
         stm.close();
     }
-    
+   
+    /**
+   	 * Método responsável por deletar um EnderecoCliente do banco
+   	 *
+   	 * @param e EnderecoCliente que será delatado do banco de dados
+   	 */
     public static void delete(EnderecoCliente e) throws SQLException{
         if (e.getPk_endereco()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
