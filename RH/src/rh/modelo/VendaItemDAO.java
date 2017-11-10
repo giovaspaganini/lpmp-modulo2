@@ -13,11 +13,18 @@ import java.util.ArrayList;
 import rh.negocio.VendaItem;
 
 /**
- *
- * @author Gabriela
+ * Classe responsável pela persistencia de VendaItem
+ *  
  */
+
 public class VendaItemDAO {
 
+	/**
+   	 * Método responsável por percistir um VendaItem no banco
+   	 *
+   	 * @param vi VendaItem que será gravado no banco
+   	 * @return chave primária 
+   	 */
     public int create(VendaItem vi) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
@@ -44,6 +51,12 @@ public class VendaItemDAO {
         return vi.getPk();
     }
 
+    /**
+   	 * Método responsável por recuperar VendaItem pela chave primária
+   	 *
+   	 * @param pk_vendaitem chave primária que será pesquisada no banco
+   	 * @return Objeto VendaItem
+   	 */
     public static VendaItem retrieve(int pk_vendaitem) throws SQLException {
         Connection conn = BancoDados.createConnection();
 
@@ -69,6 +82,10 @@ public class VendaItemDAO {
         return vi;
     }    
 
+    /**
+   	 * Método responsável por recuperar todas as VendasItens salvas no banco
+   	 * @return Todas as VendasItens salvas no banco
+   	 */
     public static ArrayList<VendaItem> retrieveAll() throws SQLException {
         Connection conn = BancoDados.createConnection();
 
@@ -95,6 +112,11 @@ public class VendaItemDAO {
         return aux;
     }
     
+    /**
+   	 * Método responsável por atualizar um VendaItem no banco
+   	 *
+   	 * @param vi Objeto VendaItem que seŕa atualizado
+   	 */
     public static void update(VendaItem vi) throws SQLException{
         Connection conn = BancoDados.createConnection();
         
@@ -111,6 +133,11 @@ public class VendaItemDAO {
         
         }
     
+    /**
+   	 * Método responsável por deletar um VendaItem do banco de dados
+   	 *
+   	 * @param Objecto VendaItem que será deletado do banco de dados
+   	 */
      public static void delete(VendaItem vi) throws SQLException{
         if (vi.getPk()==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
@@ -126,6 +153,11 @@ public class VendaItemDAO {
         stm.close();        
     }
     
+     /**
+    	 * Método responsável por deletar um VendaItem do banco passando uma chave primária
+    	 *
+    	 * @param id chave primária do VendaItem que será deletado
+    	 */
     public static void delete(int id) throws SQLException{
         if (id==0){
             throw new SQLException("Objeto não persistido ainda ou com a chave primária não configurada");
@@ -141,6 +173,12 @@ public class VendaItemDAO {
         stm.close();        
     }
     
+    /**
+   	 * Método responsável por recuperar VendaItem por produto
+   	 *
+   	 * @param vendaPorProduto Nome que produto que será pesquisado
+   	 * @return Todas as VendaItem que contem determinado produto
+   	 */
     public static ArrayList<VendaItem> retrieveByProduto(String vendaPorProduto) throws SQLException {
         
         ArrayList<VendaItem> aux = new ArrayList<>();
