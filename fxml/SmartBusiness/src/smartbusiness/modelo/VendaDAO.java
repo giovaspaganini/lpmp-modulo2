@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import rh.negocio.RelatorioVenda;
-import smartbusiness.negocio.Cliente;
-import smartbusiness.negocio.Venda;
+import smartbusiness.controle.Cliente;
+import smartbusiness.controle.Venda;
+import smartbusiness.controle.VendaItem;
 
 
 /**
@@ -23,9 +23,8 @@ public class VendaDAO {
    	 *
    	 * @param v Objeto da Classe Venda
    	 * @return chave primária do registro criado
-     * @throws java.sql.SQLException
    	 */
-    public static int create(Venda v) throws SQLException {
+    public int create(Venda v) throws SQLException {
         Connection conn = BancoDados.createConnection();
         
         String sql = "INSERT INTO vendas(fk_cliente, fk_vendedor, numero, data VALUES (?, ?, ?, ? )";
@@ -44,11 +43,21 @@ public class VendaDAO {
         
         rs.next();
         
-        v.setPk(rs.getInt(1));
+        int PkVenda = rs.getInt("pk_venda");
         
-        stm.close();
+        v.setPk(PkVenda);
         
-        return v.getPk();        
+         for (VendaItem aux : v.getItens()) {
+             
+            aux.setFkVenda(PkVenda);
+
+            VendaItemDAO.create(aux);
+        
+           
+    }
+         stm.close();
+       
+        return PkVenda;
     }
     
     /**
@@ -89,12 +98,10 @@ public class VendaDAO {
         rs.next();
         
         
-        return new Venda(rs.getInt("pk_venda"),
-                         rs.getInt("fk_cliente"),
-                         rs.getInt("fk_vendedor"),
-                         rs.getInt("numero"),
-                         rs.getDate("data")
-        );
+        
+        Venda v = new Venda(rs.getInt("pk_venda"), rs.getInt("fk_cliente"), rs.getInt("fk_vendedor"), rs.getInt("numero"), rs.getDate("data"));
+        
+        return v;
         
     }
    
@@ -233,48 +240,5 @@ public class VendaDAO {
         
         
         return aux;
-    }
-	public static ArrayList<RelatorioVenda> retrieveRelatorioVenda() throws SQLException{
-        
-        ArrayList<RelatorioVenda> aux = new ArrayList<>();
-        
-        Connection conn = BancoDados.createConnection();
-        
-//        sql = "SELECT nome, qtd, sum(qtd*valor_unitario) as total"
-//                + " FROM vendas v JOIN produtos p ON"
-//                + " v.fk_cliente = p.pk_produto JOIN vendas_itens i ON"
-//                + " pk_venda = i.fk_venda GROUP BY nome, qtd";
-
-        String sql = "SELECT pk_venda, data_baixa, data, nome, qtd, sum(qtd*valor_unitario) as total " +
-            " FROM vendas v JOIN produtos p ON" +
-            " v.fk_cliente = p.pk_produto JOIN" +
-            " vendas_itens i ON pk_venda = i.fk_venda" +
-            " JOIN financeiros_entradas fe ON fe.fk_venda = v.pk_venda" +
-            " GROUP BY nome, qtd, v.data, data_baixa, pk_venda";
-        
-        ResultSet rs = conn.createStatement().executeQuery(sql);
-        
-        while (rs.next()){
-            
-            boolean baixa;
-            String teste = rs.getString("data_baixa");
-            if (teste == null) baixa = false;
-            else baixa = true;
-                    
-                    
-            RelatorioVenda rv = new RelatorioVenda(
-                    rs.getInt("pk_venda"),
-                    baixa,
-                    rs.getDate("data"),
-                    rs.getString("nome"),
-                    rs.getDouble("qtd"),
-                    rs.getDouble("total"));
-            
-            aux.add(rv);
-        }
-        
-        return aux;
-        
-        
     }
 }

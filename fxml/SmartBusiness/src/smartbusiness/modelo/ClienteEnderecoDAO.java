@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import smartbusiness.negocio.EnderecoCliente;
+import smartbusiness.controle.EnderecoCliente;
 
 
 /**
@@ -68,7 +68,9 @@ public class ClienteEnderecoDAO {
                          rs.getString("logradouro"),
                          rs.getString("bairro"),
                          rs.getString("cidade"),
-                         rs.getString("estado")
+                         rs.getString("estado"),
+                rs.getString("pais"),
+                rs.getString("cep")
         );
     }
     
@@ -78,15 +80,16 @@ public class ClienteEnderecoDAO {
      * @return um arraylist com todos os endereços desse funcionário
      * @throws SQLException 
      */
-    public static ArrayList<EnderecoCliente> retrieveAll() throws SQLException{
+    public static ArrayList<EnderecoCliente> retrieveAll(int fk_endereco) throws SQLException{
         
         ArrayList<EnderecoCliente> aux = new ArrayList<>();
         
         Connection conn = BancoDados.createConnection();
         
-        String sql = "select * from clientes_enderecos";
+        String sql = "select * from clientes_enderecos where fk_cliente = ?";
 
-        PreparedStatement stm = conn.prepareStatement(sql);        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, fk_endereco);
         
         stm.execute();
 
@@ -98,7 +101,9 @@ public class ClienteEnderecoDAO {
                          rs.getString("logradouro"),
                          rs.getString("bairro"),
                          rs.getString("cidade"),
-                         rs.getString("estado"));
+                         rs.getString("estado"),
+                         rs.getString("pais"),
+                         rs.getString("cep"));
 
             aux.add(e);
         }        
@@ -151,8 +156,4 @@ public class ClienteEnderecoDAO {
         stm.execute();
         stm.close();        
     }    
-
-    static ArrayList<EnderecoCliente> retrieveAll(int pk_cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

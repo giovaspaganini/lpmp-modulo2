@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="smartbusiness.negocio.TelaCargoController">
+   <children>
+      <SplitPane dividerPositions="0.36904761904761907" layoutX="3.0" layoutY="2.0" prefHeight="389.0" prefWidth="590.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="205.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="375.0">
+               <children>
+                  <TextField fx:id="tfNome" layoutX="15.0" layoutY="70.0" prefHeight="25.0" prefWidth="335.0" promptText="Nome do Cargo" />
+                  <TextArea fx:id="taDescricao" layoutX="17.0" layoutY="135.0" prefHeight="200.0" prefWidth="335.0" promptText="Descrição do Cargo" />
+                  <Label layoutX="17.0" layoutY="48.0" text="Nome do Cargo:" />
+                  <Label layoutX="17.0" layoutY="114.0" text="Descrição do Cargo:" />
+                  <Button layoutX="276.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textFill="RED" />
+                  <Button layoutX="208.0" layoutY="348.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+                  <Label layoutX="17.0" layoutY="14.0" text="Cargos">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
